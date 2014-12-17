@@ -18,7 +18,7 @@ SunlightApp::SunlightApp(int argc, char *argv[])
 
     createTrayIcon();
 
-    QObject *launcher = m_launcherWidget->findChild("launcherWindow");
+    QObject *launcher = m_launcherWidget->findChild("SearchBox");
 
     connect(launcher, SIGNAL(inputChanged(QString)),
             m_suggestionMgr, SLOT(getSuggestion(QString)));

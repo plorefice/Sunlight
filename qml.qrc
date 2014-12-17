@@ -4,5 +4,6 @@
         <file>Launcher.qml</file>
         <file>res/icons/sl_find_lo.png</file>
         <file>res/icons/sl_tray.svg</file>
+        <file>SearchBox.qml</file>
     </qresource>
 </RCC>

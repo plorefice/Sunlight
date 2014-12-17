@@ -46,7 +46,7 @@ QObject *LauncherWidget::findChild(const QString &name) const
 
 void LauncherWidget::setHint(const QString &hint)
 {
-    findChild("mainText")->setProperty("text", hint);
+    findChild("SearchBox")->children()[0]->setProperty("text", hint);
 }
 
 void LauncherWidget::show()

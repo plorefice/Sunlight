@@ -38,38 +38,14 @@ Item {
         source: "/res/icons/sl_find_lo.png"
     }
 
-    Text {
-        objectName: "mainText"
-        id: mainText
-        x: 75
-        y: 14
-        z: 0.5
-        width: 730
-        height: 48
-        color: "#aaaaaa"
-        text: qsTr("")
-        horizontalAlignment: Text.AlignLeft
-        font.pixelSize: 33
-    }
-
-    TextInput {
-        id: mainInput
+    SearchBox {
+        objectName: "SearchBox"
+        id: searchBox
         x: 75
         y: 14
         z: 1
         width: 730
         height: 48
-        color: "#424242"
-        text: qsTr("")
-        selectionColor: "#4d4d4d"
-        focus: true
-        activeFocusOnPress: true
-        cursorVisible: true
-        horizontalAlignment: Text.AlignLeft
-        font.pixelSize: 33
-
-        onTextChanged: launcherWindow.inputChanged(text)
-        Keys.onReturnPressed: launcherWindow.returnPressed(text)
     }
 
     Image {
@@ -86,7 +62,7 @@ Item {
     states: [
         State {
             name: "expanded"
-            when: (mainInput.text != "")
+            when: (searchBox.text !== "")
 
             PropertyChanges { target: mainWindow; height: 560 }
             PropertyChanges { target: launcherWindow; height: 560 }

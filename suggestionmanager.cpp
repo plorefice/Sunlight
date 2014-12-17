@@ -22,7 +22,6 @@ void SuggestionManager::buildSuggestionList()
     while (it.hasNext())
     {
         it.next();
-        qDebug() << it.fileInfo().baseName();
         m_suggestions << Suggestion(it.fileInfo());
     }
 }
