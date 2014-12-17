@@ -9,11 +9,13 @@ private:
     QFileInfo m_info;
 
 public:
+    Suggestion();
     Suggestion(const QFileInfo &info);
     ~Suggestion();
 
     bool match(const QString &s) const;
 
+    QString cmd() const;
     QString toString() const;
 };
 

@@ -26,7 +26,7 @@ void SuggestionManager::buildSuggestionList()
     }
 }
 
-void SuggestionManager::getSuggestion(const QString &cmd)
+void SuggestionManager::getSuggestions(const QString &cmd)
 {
     SuggestionList l;
 
@@ -42,8 +42,10 @@ void SuggestionManager::getSuggestion(const QString &cmd)
 
     if (!l.isEmpty())
     {
+        m_currSugg = l.at(0);
+
         QString hint;
-        QString name = l.at(0).toString();
+        QString name = m_currSugg.toString();
 
         hint.append(cmd);
         hint.append(name.right(name.length() - cmd.length()));
@@ -54,4 +56,11 @@ void SuggestionManager::getSuggestion(const QString &cmd)
     {
         m_launcher->setHint("");
     }
+}
+
+void SuggestionManager::execSuggestion()
+{
+    emit dispatchCommand(m_currSugg.cmd());
+    m_launcher->clearSearchBox();
+    m_launcher->hide();
 }

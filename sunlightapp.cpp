@@ -15,13 +15,19 @@ SunlightApp::SunlightApp(int argc, char *argv[])
 {
     m_launcherWidget = new LauncherWidget;
     m_suggestionMgr = new SuggestionManager(m_launcherWidget);
+    m_dispatcher = new EventDispatcher(this);
 
     createTrayIcon();
 
     QObject *launcher = m_launcherWidget->findChild("SearchBox");
 
     connect(launcher, SIGNAL(inputChanged(QString)),
-            m_suggestionMgr, SLOT(getSuggestion(QString)));
+            m_suggestionMgr, SLOT(getSuggestions(QString)));
+    connect(launcher, SIGNAL(returnPressed()),
+            m_suggestionMgr, SLOT(execSuggestion()));
+
+    connect(m_suggestionMgr, SIGNAL(dispatchCommand(QString)),
+            m_dispatcher, SLOT(executeCmd(QString)));
 
     m_launcherWidget->hide();
     m_suggestionMgr->buildSuggestionList();
@@ -32,6 +38,7 @@ SunlightApp::~SunlightApp()
     delete m_launcherWidget;
     delete m_trayIcon;
     delete m_suggestionMgr;
+    delete m_dispatcher;
 }
 
 void SunlightApp::createTrayIcon()

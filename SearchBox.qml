@@ -4,7 +4,7 @@ Item {
     property alias text: searchInput.text
 
     signal inputChanged(string text)
-    signal returnPressed(string text)
+    signal returnPressed()
 
     Text {
         id: hintText
@@ -33,7 +33,7 @@ Item {
         activeFocusOnPress: true
 
         onTextChanged: searchBox.inputChanged(text)
-        Keys.onReturnPressed: searchBox.returnPressed(text)
+        Keys.onReturnPressed: searchBox.returnPressed()
     }
 }
 

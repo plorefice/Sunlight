@@ -13,14 +13,20 @@ private:
     LauncherWidget *m_launcher;
     SuggestionList m_suggestions;
 
+    Suggestion m_currSugg;
+
 public:
     SuggestionManager(LauncherWidget *p);
     ~SuggestionManager();
 
     void buildSuggestionList();
 
+signals:
+    void dispatchCommand(const QString &cmd);
+
 public slots:
-    void getSuggestion(const QString &cmd);
+    void getSuggestions(const QString &cmd);
+    void execSuggestion();
 };
 
 #endif // SUGGESTIONMANAGER_H

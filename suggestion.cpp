@@ -1,5 +1,10 @@
 #include "suggestion.h"
 
+Suggestion::Suggestion()
+{
+
+}
+
 Suggestion::Suggestion(const QFileInfo &info)
 {
     m_info = info;
@@ -16,6 +21,11 @@ bool Suggestion::match(const QString &s) const
         return true;
 
     return false;
+}
+
+QString Suggestion::cmd() const
+{
+    return m_info.canonicalFilePath();
 }
 
 QString Suggestion::toString() const

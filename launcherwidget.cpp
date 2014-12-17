@@ -15,7 +15,7 @@ LauncherWidget::LauncherWidget()
 
     m_topLevel = m_qmlEngine->rootObjects().value(0);
 
-    RegisterHotKey((HWND) winId(), 100, MOD_WIN, VK_F11);
+    RegisterHotKey((HWND) winId(), 100, MOD_WIN | MOD_SHIFT, VK_RETURN);
 }
 
 LauncherWidget::~LauncherWidget()
@@ -42,6 +42,12 @@ bool LauncherWidget::nativeEvent(const QByteArray &eventType, void *message, lon
 QObject *LauncherWidget::findChild(const QString &name) const
 {
     return m_topLevel->findChild<QObject *>(name, Qt::FindChildrenRecursively);
+}
+
+void LauncherWidget::clearSearchBox()
+{
+    setHint("");
+    findChild("SearchBox")->children()[1]->setProperty("text", "");
 }
 
 void LauncherWidget::setHint(const QString &hint)

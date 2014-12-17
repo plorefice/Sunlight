@@ -6,6 +6,7 @@
 
 #include "launcherwidget.h"
 #include "suggestionmanager.h"
+#include "eventdispatcher.h"
 
 class SunlightApp : public QApplication
 {
@@ -13,6 +14,8 @@ class SunlightApp : public QApplication
 private:
     LauncherWidget *m_launcherWidget;
     SuggestionManager *m_suggestionMgr;
+    EventDispatcher *m_dispatcher;
+
     QSystemTrayIcon *m_trayIcon;
 
     void createTrayIcon();

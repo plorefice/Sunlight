@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     launcherwidget.cpp \
     suggestionlist.cpp \
     suggestion.cpp \
-    suggestionmanager.cpp
+    suggestionmanager.cpp \
+    eventdispatcher.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,4 +25,5 @@ HEADERS += \
     launcherwidget.h \
     suggestionlist.h \
     suggestion.h \
-    suggestionmanager.h
+    suggestionmanager.h \
+    eventdispatcher.h

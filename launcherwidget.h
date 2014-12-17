@@ -19,6 +19,8 @@ public:
     ~LauncherWidget();
 
     QObject *findChild(const QString &name) const;
+
+    void clearSearchBox();
     void setHint(const QString &hint);
 
 public slots:
