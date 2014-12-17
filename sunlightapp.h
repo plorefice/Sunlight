@@ -5,12 +5,14 @@
 #include <QSystemTrayIcon>
 
 #include "launcherwidget.h"
+#include "suggestionmanager.h"
 
 class SunlightApp : public QApplication
 {
     Q_OBJECT
 private:
     LauncherWidget *m_launcherWidget;
+    SuggestionManager *m_suggestionMgr;
     QSystemTrayIcon *m_trayIcon;
 
     void createTrayIcon();

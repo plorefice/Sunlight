@@ -11,20 +11,17 @@ private:
     QQmlApplicationEngine *m_qmlEngine;
     QObject *m_topLevel;
 
-    QStringList m_cmdList;
-    QString     m_cmd;
-
 protected:
     virtual bool nativeEvent(const QByteArray &eventType, void *message, long *result);
 
 public:
-    LauncherWidget(QWidget *p = 0);
+    LauncherWidget();
     ~LauncherWidget();
 
-public slots:
-    void handleInputChanged(const QString &txt);
-    void execCommand(const QString &txt);
+    QObject *findChild(const QString &name) const;
+    void setHint(const QString &hint);
 
+public slots:
     void show();
     void hide();
     void toggle();

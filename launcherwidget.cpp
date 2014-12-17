@@ -7,26 +7,20 @@
 #include <windows.h>
 #include <winuser.h>
 
-LauncherWidget::LauncherWidget(QWidget *p)
-    : QWidget(p)
+LauncherWidget::LauncherWidget()
+    : QWidget(NULL)
 {
     m_qmlEngine = new QQmlApplicationEngine(this);
     m_qmlEngine->load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     m_topLevel = m_qmlEngine->rootObjects().value(0);
 
-    QObject *item  = m_topLevel->findChild<QObject *>("launcherWindow");
-
-    connect(item, SIGNAL(inputChanged(QString)), this, SLOT(handleInputChanged(QString)));
-    connect(item, SIGNAL(returnPressed(QString)), this, SLOT(execCommand(QString)));
-
-    /* DEBUG */
-    m_cmdList << "cmd.exe" << "matlab.exe" << "notepad.exe" << "game.lnk";
+    RegisterHotKey((HWND) winId(), 100, MOD_WIN, VK_F11);
 }
 
 LauncherWidget::~LauncherWidget()
 {
-
+    delete m_qmlEngine;
 }
 
 bool LauncherWidget::nativeEvent(const QByteArray &eventType, void *message, long *result)
@@ -38,53 +32,21 @@ bool LauncherWidget::nativeEvent(const QByteArray &eventType, void *message, lon
 
     if (msg->message == WM_HOTKEY)
     {
-        qDebug() << "hotkey";
         this->toggle();
-
         return true;
     }
 
     return false;
 }
 
-void LauncherWidget::handleInputChanged(const QString &txt)
+QObject *LauncherWidget::findChild(const QString &name) const
 {
-    QObject *subbox = m_topLevel->findChild<QObject *>("mainText");
-
-    if (txt.isEmpty())
-    {
-        subbox->setProperty("text", "");
-        return;
-    }
-
-    QStringList results;
-    for (const QString &s : m_cmdList)
-        if (s.startsWith(txt, Qt::CaseInsensitive))
-            results << s;
-
-    if (!results.isEmpty())
-    {
-        m_cmd = results.at(0);
-        subbox->setProperty("text", m_cmd);
-    }
-    else
-    {
-        m_cmd.clear();
-    }
-
-    qDebug() << results;
+    return m_topLevel->findChild<QObject *>(name, Qt::FindChildrenRecursively);
 }
 
-void LauncherWidget::execCommand(const QString &txt)
+void LauncherWidget::setHint(const QString &hint)
 {
-    QProcess proc;
-
-    if (!m_cmd.isEmpty())
-        proc.startDetached(m_cmd);
-    else
-        proc.startDetached(txt);
-
-    hide();
+    findChild("mainText")->setProperty("text", hint);
 }
 
 void LauncherWidget::show()

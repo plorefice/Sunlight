@@ -6,7 +6,10 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     sunlightapp.cpp \
-    launcherwidget.cpp
+    launcherwidget.cpp \
+    suggestionlist.cpp \
+    suggestion.cpp \
+    suggestionmanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,4 +21,7 @@ include(deployment.pri)
 
 HEADERS += \
     sunlightapp.h \
-    launcherwidget.h
+    launcherwidget.h \
+    suggestionlist.h \
+    suggestion.h \
+    suggestionmanager.h
