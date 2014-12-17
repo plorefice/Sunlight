@@ -4,18 +4,27 @@
 #include <QProcess>
 #include <QDebug>
 
+#ifdef Q_OS_WIN
 #include <windows.h>
 #include <winuser.h>
+#endif
+
+#include "appiconprovider.h"
 
 LauncherWidget::LauncherWidget()
     : QWidget(NULL)
 {
     m_qmlEngine = new QQmlApplicationEngine(this);
+    m_iconProvider = new AppIconProvider;
+
+    m_qmlEngine->addImageProvider("appicon", m_iconProvider);
     m_qmlEngine->load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     m_topLevel = m_qmlEngine->rootObjects().value(0);
 
+#ifdef Q_OS_WIN
     RegisterHotKey((HWND) winId(), 100, MOD_WIN | MOD_SHIFT, VK_RETURN);
+#endif
 }
 
 LauncherWidget::~LauncherWidget()
@@ -53,6 +62,12 @@ void LauncherWidget::clearSearchBox()
 void LauncherWidget::setHint(const QString &hint)
 {
     findChild("SearchBox")->children()[0]->setProperty("text", hint);
+}
+
+void LauncherWidget::setAppIcon(const QPixmap &p, const QString &name)
+{
+    m_iconProvider->setIcon(p);
+    findChild("AppIcon")->setProperty("source", "image://appicon/" + name);
 }
 
 void LauncherWidget::show()

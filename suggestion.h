@@ -2,11 +2,13 @@
 #define SUGGESTION_H
 
 #include <QFileInfo>
+#include <QPixmap>
 
 class Suggestion
 {
 private:
     QFileInfo m_info;
+    QPixmap   m_icon;
 
 public:
     Suggestion();
@@ -16,6 +18,8 @@ public:
     bool match(const QString &s) const;
 
     QString cmd() const;
+    QPixmap icon() const;
+
     QString toString() const;
 };
 

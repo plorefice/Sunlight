@@ -3,6 +3,12 @@
 #include <QDirIterator>
 #include <QStringBuilder>
 #include <QDebug>
+#include <QtGui>
+#include <QtWinExtras/QtWinExtras>
+
+#ifdef Q_OS_WIN
+#include <qt_windows.h>
+#endif
 
 SuggestionManager::SuggestionManager(LauncherWidget *p)
 {
@@ -28,14 +34,17 @@ void SuggestionManager::buildSuggestionList()
 
 void SuggestionManager::getSuggestions(const QString &cmd)
 {
-    SuggestionList l;
-
     if (cmd.isEmpty())
     {
+        QPixmap p(32,32);
+        p.fill(Qt::transparent);
+
         m_launcher->setHint("");
+        m_launcher->setAppIcon(p, "null");
         return;
     }
 
+    SuggestionList l;
     for (const Suggestion &s : m_suggestions)
         if (s.match(cmd))
             l << s;
@@ -51,16 +60,27 @@ void SuggestionManager::getSuggestions(const QString &cmd)
         hint.append(name.right(name.length() - cmd.length()));
 
         m_launcher->setHint(hint);
+        m_launcher->setAppIcon(m_currSugg.icon(), hint.toHtmlEscaped());
+
+        qDebug() << hint.toHtmlEscaped();
     }
     else
     {
+        QPixmap p(32,32);
+        p.fill(Qt::transparent);
+
         m_launcher->setHint("");
+        m_launcher->setAppIcon(p, "null");
+        return;
     }
 }
 
 void SuggestionManager::execSuggestion()
 {
-    emit dispatchCommand(m_currSugg.cmd());
+    QString cmd = m_currSugg.cmd();
+
+    emit dispatchCommand(cmd);
+
     m_launcher->clearSearchBox();
     m_launcher->hide();
 }

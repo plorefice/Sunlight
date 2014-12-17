@@ -1,23 +1,23 @@
 #include "sunlightapp.h"
 
-#include <windows.h>
-#include <winuser.h>
-
 #include <QDesktopWidget>
 #include <QMenu>
 #include <QDir>
 #include <QDirIterator>
+#include <QDeclarativeEngine>
 #include <QDebug>
 
+#include "appiconprovider.h"
 
 SunlightApp::SunlightApp(int argc, char *argv[])
     : QApplication(argc, argv)
 {
-    m_launcherWidget = new LauncherWidget;
-    m_suggestionMgr = new SuggestionManager(m_launcherWidget);
     m_dispatcher = new EventDispatcher(this);
 
-    createTrayIcon();
+    m_launcherWidget = new LauncherWidget;
+    m_launcherWidget->hide();
+
+    m_suggestionMgr = new SuggestionManager(m_launcherWidget);
 
     QObject *launcher = m_launcherWidget->findChild("SearchBox");
 
@@ -29,7 +29,8 @@ SunlightApp::SunlightApp(int argc, char *argv[])
     connect(m_suggestionMgr, SIGNAL(dispatchCommand(QString)),
             m_dispatcher, SLOT(executeCmd(QString)));
 
-    m_launcherWidget->hide();
+    createTrayIcon();
+
     m_suggestionMgr->buildSuggestionList();
 }
 
@@ -39,6 +40,7 @@ SunlightApp::~SunlightApp()
     delete m_trayIcon;
     delete m_suggestionMgr;
     delete m_dispatcher;
+    delete m_declEngine;
 }
 
 void SunlightApp::createTrayIcon()

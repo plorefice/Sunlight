@@ -49,14 +49,15 @@ Item {
     }
 
     Image {
+        objectName: "AppIcon"
         id: appIcon
-        x: 829
-        y: 11
-        width: 48
-        height: 48
+        x: 831
+        y: 19
+        width: 32
+        height: 32
         z: 1
         transformOrigin: Item.Center
-        source: "qrc:/qtquickplugin/images/template_image.png"
+        source: "image://appicon/icon"
     }
 
     states: [

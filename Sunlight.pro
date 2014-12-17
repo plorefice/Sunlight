@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets winextras
 
 CONFIG += c++11
 
@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     suggestionlist.cpp \
     suggestion.cpp \
     suggestionmanager.cpp \
-    eventdispatcher.cpp
+    eventdispatcher.cpp \
+    appiconprovider.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,4 +27,5 @@ HEADERS += \
     suggestionlist.h \
     suggestion.h \
     suggestionmanager.h \
-    eventdispatcher.h
+    eventdispatcher.h \
+    appiconprovider.h
