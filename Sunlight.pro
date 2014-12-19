@@ -5,14 +5,7 @@ QTPLUGIN += qsvg
 
 CONFIG += c++11
 
-SOURCES += main.cpp \
-    sunlightapp.cpp \
-    launcherwidget.cpp \
-    suggestionlist.cpp \
-    suggestion.cpp \
-    suggestionmanager.cpp \
-    eventdispatcher.cpp \
-    appiconprovider.cpp
+SOURCES += main.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,11 +17,6 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-HEADERS += \
-    sunlightapp.h \
-    launcherwidget.h \
-    suggestionlist.h \
-    suggestion.h \
-    suggestionmanager.h \
-    eventdispatcher.h \
-    appiconprovider.h
+# Include sub-directories
+include(core/core.pri)
+include(gui/gui.pri)
