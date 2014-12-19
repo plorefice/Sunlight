@@ -1,6 +1,7 @@
 TEMPLATE = app
 
-QT += qml quick widgets winextras
+QT       += qml quick widgets winextras
+QTPLUGIN += qsvg
 
 CONFIG += c++11
 
@@ -14,6 +15,8 @@ SOURCES += main.cpp \
     appiconprovider.cpp
 
 RESOURCES += qml.qrc
+
+QMAKE_CXXFLAGS += -Wall
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

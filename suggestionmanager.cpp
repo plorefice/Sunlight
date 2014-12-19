@@ -1,14 +1,7 @@
 #include "suggestionmanager.h"
 
 #include <QDirIterator>
-#include <QStringBuilder>
 #include <QDebug>
-#include <QtGui>
-#include <QtWinExtras/QtWinExtras>
-
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-#endif
 
 SuggestionManager::SuggestionManager(LauncherWidget *p)
 {

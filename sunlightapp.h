@@ -3,7 +3,6 @@
 
 #include <QApplication>
 #include <QSystemTrayIcon>
-#include <QDeclarativeEngine>
 
 #include "launcherwidget.h"
 #include "suggestionmanager.h"
@@ -17,7 +16,6 @@ private:
     SuggestionManager *m_suggestionMgr;
     EventDispatcher *m_dispatcher;
 
-    QDeclarativeEngine *m_declEngine;
     QSystemTrayIcon *m_trayIcon;
 
     void createTrayIcon();

@@ -1,13 +1,7 @@
 #include "sunlightapp.h"
-
-#include <QDesktopWidget>
-#include <QMenu>
-#include <QDir>
-#include <QDirIterator>
-#include <QDeclarativeEngine>
-#include <QDebug>
-
 #include "appiconprovider.h"
+
+#include <QMenu>
 
 SunlightApp::SunlightApp(int argc, char *argv[])
     : QApplication(argc, argv)
@@ -40,7 +34,6 @@ SunlightApp::~SunlightApp()
     delete m_trayIcon;
     delete m_suggestionMgr;
     delete m_dispatcher;
-    delete m_declEngine;
 }
 
 void SunlightApp::createTrayIcon()

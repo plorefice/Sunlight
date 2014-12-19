@@ -2,7 +2,6 @@
 #define EVENTDISPATCHER_H
 
 #include <QObject>
-#include <QProcess>
 
 class EventDispatcher : public QObject
 {

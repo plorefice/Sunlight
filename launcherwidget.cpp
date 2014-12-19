@@ -1,15 +1,12 @@
 #include "launcherwidget.h"
+#include "appiconprovider.h"
 
-#include <QApplication>
-#include <QProcess>
 #include <QDebug>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <winuser.h>
 #endif
-
-#include "appiconprovider.h"
 
 LauncherWidget::LauncherWidget()
     : QWidget(NULL)
